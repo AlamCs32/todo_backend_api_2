@@ -25,11 +25,11 @@ app.use(cors({
 // Add security headers
 app.use(helmet())
 
-// Allow all Routes
-app.use("/", allRoutes);
-
 // Log http requests
 app.use(morgan("dev"));
+
+// Allow all Routes
+app.use("/", allRoutes);
 
 // Server Swagger Docs
 app.use('/api-docs', forwardedPrefixMiddleware, swaggerUi.serve, swaggerUi.setup(swaggerFile));

@@ -68,6 +68,9 @@ export const getTodoStatus = async (userSession: UserSessionData, query: Partial
             where: {
                 ...whereConditions,
                 dueDate: { lt: moment().format("YYYY-MM-DD") },
+                status: {
+                    not: "COMPLETED"
+                }
             },
         })
     ])
