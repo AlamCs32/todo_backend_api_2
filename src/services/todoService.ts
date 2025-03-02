@@ -91,8 +91,14 @@ export const getTodo = async (userSession: UserSessionData, query: Partial<GetTo
 
     const whereConditions: Record<string, any> = { userId, isActive: true };
 
-    if (dueDate) whereConditions.dueDate = { lt: moment().format("YYYY-MM-DD").toString() };
-    if (status) whereConditions.status = status as string;
+if (status) whereConditions.status = status as string;
+
+    if (dueDate){
+whereConditions.dueDate = { lt: moment().format("YYYY-MM-DD").toString() };
+whereConditions.status = {not:"COMPLETED"}
+} 
+
+    
 
     if (search) {
         whereConditions.OR = [
