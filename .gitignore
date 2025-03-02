@@ -5,3 +5,4 @@ dist
 prisma/migrations/*
 src/swagger-output.json
 ./package-lock.json
+src/config/ca.pem

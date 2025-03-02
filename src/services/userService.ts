@@ -89,7 +89,7 @@ export const forgetPassword = async (body: ForgetPasswordPayload) => {
     const user = await prisma.user.findUnique({
         where: { email }
     })
-    if (user) throw new Error(`User is not present`)
+    if (!user) throw new Error(`User is not present`)
 
     const domain = FE_DOMAIN
 
@@ -112,7 +112,7 @@ export const forgetPassword = async (body: ForgetPasswordPayload) => {
         })
     }
 
-    return
+    return { userId: user.userId }
 }
 
 export const resetPassword = async (token: string, body: ResetPasswordPayload) => {
@@ -123,7 +123,7 @@ export const resetPassword = async (token: string, body: ResetPasswordPayload) =
     const user = await prisma.user.findUnique({
         where: { userId }
     })
-    if (user) throw new Error(`User is not present`)
+    if (!user) throw new Error(`User is not present`)
 
     if (password !== confirmPassword) {
         throw new Error(`Password and confirm password not match`)
@@ -137,5 +137,5 @@ export const resetPassword = async (token: string, body: ResetPasswordPayload) =
         data: { password }
     })
 
-    return
+    return { userId }
 }
